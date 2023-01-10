@@ -99,38 +99,30 @@ const randomFunc = {
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  let combinedCharacters = [];
   // Length of password:
-  let passwordOption = prompt("Password length: Choose At least 10 characters but no more than 64")
-  console.log(passwordOption);
+  let passwordLength = prompt("Password length: Choose At least 10 characters but no more than 64")
 
   // At least 10 characters but no more than 64.
-  if (passwordOption >= 10 && passwordOption <= 64) {
-    let lowerOption = confirm("Character types: Do you whant to use lowercase characters")
-    console.log(lowerOption)
+  if (passwordLength >= 10 && passwordLength <= 64) {
+    let lowerOption = confirm("Character types: Do you whant to use lowercase characters");
+    let upperOption = confirm("Character types: Do you whant to use uppercase characters");
+    let numericOption = confirm("Character types: Do you whant to use numeric characters");
+    let specialOption = confirm("Character types: Do you whant to use special characters");
 
-    let upperOption = confirm("Character types: Do you whant to use uppercase characters")
-    console.log(upperOption)
-
-    let numericOption = confirm("Character types: Do you whant to use numeric characters")
-    console.log(numericOption)
-
-    let specialOption = confirm("Character types: Do you whant to use special characters")
-    console.log(specialOption);
-
+    // number of types (true and false are represented as 1 and 0)
     const typesCount = lowerOption + upperOption + numericOption + specialOption;
-    console.log(typesCount)
 
+    // Array of types options
     const typesArr = [{ lowerOption }, { upperOption }, { numericOption }, { specialOption }].filter(item => Object.values(item)[0]);
-    console.log(typesArr)
 
     // Doesn't have a selected type
     if (typesCount === 0) {
       return '';
     }
-  }
 
-  console.log(combinedCharacters);
+    //return number of types, array of types options and 
+    return {typesCount, typesArr, passwordLength};
+  }
 
 }
 
