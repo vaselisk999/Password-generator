@@ -100,19 +100,16 @@ function getPasswordOptions() {
     let number = confirm("Character types: Do you whant to use numeric characters");
     let symbol = confirm("Character types: Do you whant to use special characters");
 
-    // number of types (true and false are represented as 1 and 0)
-    const typesCount = lower + upper + number + symbol;
-
     // Array of types options
     const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(item => Object.values(item)[0]);
 
     // Doesn't have a selected type
-    if (typesCount === 0) {
-      return '';
+    if (!lower || !upper || !number || !symbol) {
+      return;
     }
 
     //return number of types, array of types options and 
-    return { typesCount, typesArr, passwordLength };
+    return { typesArr, passwordLength };
   }
 }
 
@@ -137,9 +134,10 @@ function getnumericRandom() {
 function getspecialRandom() {
   return specialCharacters[Math.floor(Math.random() * (specialCharacters.length - 1)) + 1];
 }
+
 // Function to generate password with user input
 function generatePassword() {
-  const { typesCount, typesArr, passwordLength } = getPasswordOptions();
+  const { typesArr, passwordLength } = getPasswordOptions();
   let generatedPassword = "";
   // get index via step typesCount = 4 index (0, 4, 8)
   for (let i = 0; i < passwordLength; i++) {
@@ -164,7 +162,6 @@ var generateBtn = document.querySelector('#generate');
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
-
   passwordText.value = password;
 }
 
