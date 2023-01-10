@@ -95,6 +95,8 @@ const randomFunc = {
   symbol: getRandom(specialCharacters)
 }
 
+
+
 // Function to prompt user for password options
 function getPasswordOptions() {
   let combinedCharacters = [];
@@ -104,32 +106,27 @@ function getPasswordOptions() {
 
   // At least 10 characters but no more than 64.
   if (passwordOption >= 10 && passwordOption <= 64) {
-    let lowercaseOption = confirm("Character types: Do you whant to use lowercase characters")
-    console.log(lowercaseOption)
+    let lowerOption = confirm("Character types: Do you whant to use lowercase characters")
+    console.log(lowerOption)
 
-    if(lowercaseOption){
-      combinedCharacters.concat(lowerCasedCharacters);
-    }
-
-    let uppercaseOption = confirm("Character types: Do you whant to use uppercase characters")
-    console.log(uppercaseOption)
-
-    if(uppercaseOption){
-      combinedCharacters.concat(upperCasedCharacters);
-    }
+    let upperOption = confirm("Character types: Do you whant to use uppercase characters")
+    console.log(upperOption)
 
     let numericOption = confirm("Character types: Do you whant to use numeric characters")
     console.log(numericOption)
 
-    if(numericOption){
-      combinedCharacters.concat(numericCharacters);
-    }
+    let specialOption = confirm("Character types: Do you whant to use special characters")
+    console.log(specialOption);
 
-    let specialCharactersOption = confirm("Character types: Do you whant to use special characters")
-    console.log(specialCharactersOption);
+    const typesCount = lowerOption + upperOption + numericOption + specialOption;
+    console.log(typesCount)
 
-    if(specialCharactersOption){
-      combinedCharacters.concat(specialCharacters);
+    const typesArr = [{ lowerOption }, { upperOption }, { numericOption }, { specialOption }].filter(item => Object.values(item)[0]);
+    console.log(typesArr)
+
+    // Doesn't have a selected type
+    if (typesCount === 0) {
+      return '';
     }
   }
 
