@@ -95,16 +95,16 @@ function getPasswordOptions() {
 
   // At least 10 characters but no more than 64.
   if (passwordLength >= 10 && passwordLength <= 64) {
-    let lowerOption = confirm("Character types: Do you whant to use lowercase characters");
-    let upperOption = confirm("Character types: Do you whant to use uppercase characters");
-    let numericOption = confirm("Character types: Do you whant to use numeric characters");
-    let specialOption = confirm("Character types: Do you whant to use special characters");
+    let lower = confirm("Character types: Do you whant to use lowercase characters");
+    let upper = confirm("Character types: Do you whant to use uppercase characters");
+    let number = confirm("Character types: Do you whant to use numeric characters");
+    let symbol = confirm("Character types: Do you whant to use special characters");
 
     // number of types (true and false are represented as 1 and 0)
-    const typesCount = lowerOption + upperOption + numericOption + specialOption;
+    const typesCount = lower + upper + number + symbol;
 
     // Array of types options
-    const typesArr = [{ lowerOption }, { upperOption }, { numericOption }, { specialOption }].filter(item => Object.values(item)[0]);
+    const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(item => Object.values(item)[0]);
 
     // Doesn't have a selected type
     if (typesCount === 0) {
@@ -112,11 +112,11 @@ function getPasswordOptions() {
     }
 
     //return number of types, array of types options and 
-    return {typesCount, typesArr, passwordLength};
+    return { typesCount, typesArr, passwordLength };
   }
-
 }
 
+//object of keys with random value
 const randomFunc = {
   lower: getRandom(lowerCasedCharacters),
   upper: getRandom(upperCasedCharacters),
@@ -130,14 +130,21 @@ function getRandom(arr) {
 }
 // Function to generate password with user input
 function generatePassword() {
-  const {typesCount, typesArr, passwordLength} = getPasswordOptions();
-  console.log(typesCount);
-  for (let i = 0; i < passwordLength; i+=typesCount){
-    console.log(i);
-    typesArr.array.forEach(element => {
-      console.log(element);
+  const { typesCount, typesArr, passwordLength } = getPasswordOptions();
+  let generatedPassword = "";
+  // get index via step typesCount = 4 index (0, 4, 8)
+  for (let i = 0; i < passwordLength; i += typesCount) {
+    // get types objects on each step
+    typesArr.forEach(element => {
+      // get random typesArr keys. typesArr keys name shoul be equal to randomFunc keys name
+      const key = Object.keys(element)[0];
+      //filling a variable with a random value
+      generatedPassword += randomFunc[key];
     });
   }
+
+  console.log(generatedPassword);
+
   return "password"
 }
 
