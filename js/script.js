@@ -146,7 +146,6 @@ function generatePassword() {
   let generatedPassword = "";
   // get index via step typesCount = 4 index (0, 4, 8)
   for (let i = 0; i < passwordLength; i++) {
-    console.log()
     // get types objects on each step
     typesArr.forEach(element => {
       // get random typesArr keys. typesArr keys name shoul be equal to randomFunc keys name
