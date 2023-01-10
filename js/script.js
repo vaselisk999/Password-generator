@@ -100,16 +100,21 @@ function getPasswordOptions() {
     let number = confirm("Character types: Do you whant to use numeric characters");
     let symbol = confirm("Character types: Do you whant to use special characters");
 
+    // number of types (true and false are represented as 1 and 0)
+    const typesCount = lower + upper + number + symbol;
+
     // Array of types options
     const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(item => Object.values(item)[0]);
 
     // Doesn't have a selected type
-    if (!lower || !upper || !number || !symbol) {
-      return;
+    if (typesCount === 0) {
+      return "";
     }
 
     //return number of types, array of types options and 
     return { typesArr, passwordLength };
+  }else {
+    return "";
   }
 }
 
