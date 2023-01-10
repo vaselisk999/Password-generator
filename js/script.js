@@ -118,34 +118,43 @@ function getPasswordOptions() {
 
 //object of keys with random value
 const randomFunc = {
-  lower: getRandom(lowerCasedCharacters),
-  upper: getRandom(upperCasedCharacters),
-  number: getRandom(numericCharacters),
-  symbol: getRandom(specialCharacters)
+  lower: getlowerRandom,
+  upper: getupperRandom,
+  number: getnumericRandom,
+  symbol: getspecialRandom
 }
 
 // Function for getting a random element from an array
-function getRandom(arr) {
-  return Math.floor(Math.random() * arr.length);
+function getlowerRandom() {
+  return lowerCasedCharacters[Math.floor(Math.random() * (lowerCasedCharacters.length - 1)) + 1];
+}
+function getupperRandom() {
+  return upperCasedCharacters[Math.floor(Math.random() * (upperCasedCharacters.length - 1)) + 1];
+}
+function getnumericRandom() {
+  return numericCharacters[Math.floor(Math.random() * (numericCharacters.length - 1)) + 1];
+}
+function getspecialRandom() {
+  return specialCharacters[Math.floor(Math.random() * (specialCharacters.length - 1)) + 1];
 }
 // Function to generate password with user input
 function generatePassword() {
   const { typesCount, typesArr, passwordLength } = getPasswordOptions();
   let generatedPassword = "";
   // get index via step typesCount = 4 index (0, 4, 8)
-  for (let i = 0; i < passwordLength; i += typesCount) {
+  for (let i = 0; i < passwordLength; i++) {
+    console.log()
     // get types objects on each step
     typesArr.forEach(element => {
       // get random typesArr keys. typesArr keys name shoul be equal to randomFunc keys name
       const key = Object.keys(element)[0];
       //filling a variable with a random value
-      generatedPassword += randomFunc[key];
+      generatedPassword += randomFunc[key]();
     });
   }
 
-  console.log(generatedPassword);
-
-  return "password"
+  const finalPassword = generatedPassword.slice(0, passwordLength);
+  return finalPassword
 }
 
 // Get references to the #generate element
