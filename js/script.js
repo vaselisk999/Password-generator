@@ -88,15 +88,6 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-const randomFunc = {
-  lower: getRandom(lowerCasedCharacters),
-  upper: getRandom(upperCasedCharacters),
-  number: getRandom(numericCharacters),
-  symbol: getRandom(specialCharacters)
-}
-
-
-
 // Function to prompt user for password options
 function getPasswordOptions() {
   // Length of password:
@@ -126,7 +117,12 @@ function getPasswordOptions() {
 
 }
 
-getPasswordOptions()
+const randomFunc = {
+  lower: getRandom(lowerCasedCharacters),
+  upper: getRandom(upperCasedCharacters),
+  number: getRandom(numericCharacters),
+  symbol: getRandom(specialCharacters)
+}
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -134,11 +130,15 @@ function getRandom(arr) {
 }
 // Function to generate password with user input
 function generatePassword() {
-  // let password = "";
-  // for (let i = 0; i < passLength; i++){
-
-  // }
-  // return password
+  const {typesCount, typesArr, passwordLength} = getPasswordOptions();
+  console.log(typesCount);
+  for (let i = 0; i < passwordLength; i+=typesCount){
+    console.log(i);
+    typesArr.array.forEach(element => {
+      console.log(element);
+    });
+  }
+  return "password"
 }
 
 // Get references to the #generate element
